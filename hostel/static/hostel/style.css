@@ -1,0 +1,32 @@
+body {
+    background-color: #e8ecf2;
+}
+
+ul.errorlist {
+    padding-left: 0;
+}
+
+ul.errorlist > li {
+    list-style: none;
+}
+
+.navbar {
+    border-radius: 0;
+}
+
+.navbar-brand {
+    font-family: Arial;
+    padding-left: : 50px;
+    padding-right: 50px;
+    color: black;
+}
+
+
+.glyphicon-star {
+    color: #CCCCCC;
+    font-size: 16px;
+}
+
+.glyphicon-star.active {
+    color: #FDB230;
+}

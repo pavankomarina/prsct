@@ -1,0 +1,64 @@
+{% extends 'hostel/base.html' %}
+{% block title %}All Files{% endblock %}
+{% block songs_active %}active{% endblock %}
+
+{% block body %}
+<div class="container-fluid songs-container">
+
+    <div class="row">
+        <div class="col-sm-12">
+            <ul class="nav nav-pills" style="margin-bottom: 10px;">
+                <li role="presentation" {% if filter_by == 'all' %}class="active"{% endif %}><a href="{% url 'hostel:files' 'all' %}">View All Files</a></li>
+               
+            </ul>
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="col-sm-12">
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Semester</th>
+                                <th>Name</th>
+                                <th>Marks Card</th>
+                                <th>College name</th>
+                                <!--<th>Favorite</th>-->
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for file in file_list %}
+                                <tr>
+                                    <td>{{ file.semester }}</td>
+                                    <td>{{ file.profile.name }}</td>
+                                    <td>
+                                        <a target="_blank" href="{{ file.marks_card.url }}">
+                                            <button type="button" class="btn btn-success btn-xs">
+                                                <span class="glyphicon glyphicon-file"></span>&nbsp; View
+                                            </button>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        
+                                            
+                                        
+                                        <a>{{ file.profile.college }}</a>
+                                    </td>
+                                    
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}

@@ -1,0 +1,158 @@
+{% extends 'hostel/base.html' %}
+{% block albums_active %}active{% endblock %}
+{% block body %}
+
+
+    <!-- Profile -->
+    
+        
+        <h2>Prathipati Rangamma and Subbaiah Charitable Trust</h2></br>
+            
+            <marquee><h4>Welcome back {{ user.username }}  !</h4></marquee>
+    <div class="albums-container container-fluid">
+        <div class="row">
+            {% if profiles %}
+                {% for profile in profiles %}
+                    <div class="col-sm-4 col-md-3">
+                        <div class="thumbnail">
+                       
+                           <a> <img src="{{ profile.photo.url }}" class="img-responsive">
+                        </a>
+                        <div class="caption">
+                            <h2>{{ profile.name }}</h2>
+                            <h4>{{ profile.course }}</h4>
+                            
+
+                            <!-- View Details -->
+                            <a href="{% url  'hostel:detail'  profile.id %}" class="btn btn-primary btn-sm" role="button">View Profile</a>
+
+                        </div>
+                    </div>
+                </div>
+                {% cycle '' '' '' '' '' '<div class="clearfix visible-lg"></div>' %}
+            {% endfor %}
+        {% else %}
+            <div class="col-sm-12">
+                <br>
+                <a href="{% url 'hostel:create_profile' %}">
+                    <button type="button" class="btn btn-success">
+                        <span class="glyphicon glyphicon-plus"></span>&nbsp; Create your Profile
+                    </button>
+                </a>
+            </div>
+        {% endif %}
+    
+    
+
+    <!-- User voting for dinner and breakfast-->
+     <div class="col-sm-4 col-md-3">
+
+            
+            <div class="panel panel-default">
+                <div class="panel-body">
+
+                    <h3>Voting</h3></br>
+
+                    {% if error_message %}
+                        <p><strong>{{ error_message }}</strong></p>
+                    {% endif %}
+                    <p>Voting is done everyday to know the number of students present in the hostel so that there will be no wastage of food</p>
+                    </br>
+                    </br>
+                    </br>
+                    </br>
+                    </br>
+                        {% if profiles %}
+                                {% for profile in profiles %}
+
+
+                           <a href="{% url 'hostel:vote'  profile.id %} "> 
+                    <button type="button" class="btn btn-success"><span class="glyphicon glyphicon-play"> Vote </span>
+                    </button>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+        {% endfor %}
+        {% endif %} 
+        <div class="col-sm-4 col-md-3">
+
+            
+            <div class="panel panel-default">
+                <div class="panel-body">
+
+                    <h3>List of students</h3></br>
+
+                    {% if error_message %}
+                        <p><strong>{{ error_message }}</strong></p>
+                    {% endif %}
+                    <p>no of students present in the hostel.</p>
+                    </br>
+                    </br>
+                    </br>
+                    </br>
+                    </br>
+                    </br>
+                    </br>
+                    <a href="{% url 'hostel:studentlist' %} "> 
+                    <button type="button" class="btn btn-success"><span class="glyphicon glyphicon-star"> Enter </span>
+                    </button>
+                    </a>
+
+                </div>
+            </div>
+
+        </div>
+   
+    {% if files %}
+        <div class="row">
+            <div class="col-sm-12">
+                <h3>Files</h3>
+            </div>
+            <div class="col-sm-12">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Semester</th>
+                                    <th>Name</th>
+                                    <th>Marks Card</th>
+                                    <th>Course</th>
+                                    <!--<th>Favorite</th>-->
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for file in files %}
+                                    <tr>
+                                        <td>{{ file.semester }}</td>
+                                        <td>{{ file.profile.name }}</td>
+                                        <td>
+                                            <a target="_blank" href="{{ file.marks_card.url }}">
+                                                <button type="button" class="btn btn-success btn-xs">
+                                                    <span class="glyphicon glyphicon-file"></span>&nbsp; View
+                                                </button>
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a href="{% url 'hostel:detail' file.profile.id %}">
+                                                <img src="{{ file.profile.photo.url }}" class="img-responsive" style="width: 20px; float: left; margin-right: 10px;" />
+                                            </a>
+                                            <a href="{% url 'hostel:detail' file.profile.id %}">{{ file.profile.college }}</a>
+                                        </td>
+                                       
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+</div>
+</div>
+
+{% endblock %}

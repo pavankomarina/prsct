@@ -1,0 +1,13 @@
+<html>
+<style type="text/css"></style>
+<body>
+<h1>List of students attending the food on next session!</h1>
+
+
+{% if members %}
+{% for p in members %}
+<li>{{p.name}}</li>
+{% endfor %}
+{% endif %}
+</body>
+</html>

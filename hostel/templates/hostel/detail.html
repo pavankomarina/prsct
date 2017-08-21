@@ -1,0 +1,91 @@
+{% extends 'hostel/base.html' %}
+{% block title %}{{ profile.name }}{% endblock %}
+{% block albums_active %}active{% endblock %}
+
+
+{% block body %}
+<div class="container-fluid songs-container">
+
+    <div class="row">
+
+        <div class="col-sm-4 col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                   
+                    <a>
+                        {% if profile.photo %}
+                            <img src="{{ profile.photo.url }}" class="img-responsive">
+                        {% else %}
+                            <h3>No image to display</h3>
+                        {% endif %}
+                    </a>
+                    <h1> {{ profile.name }}</h1></br>
+                    <h4>College :  {{profile.college}}</h4>
+                    <h5>Course :   {{ profile.course }}</h5>
+                    
+                </div>
+            </div>
+        </div>
+
+        
+        <div class="col-sm-8 col-md-9">
+
+            <ul class="nav nav-pills" style="margin-bottom: 10px;">
+                <li role="presentation" class="active"><a href="{% url 'hostel:detail' profile.id %}">View All</a></li>
+                <li role="presentation"><a href="{% url  'hostel:create_file'  profile.id %}">Add a Marks card</a></li>
+            </ul>
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+
+                    <h3>All Files</h3>
+
+                    {% if error_message %}
+                        <p><strong>{{ error_message }}</strong></p>
+                    {% endif %}
+
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Semester</th>
+                            <th>View File</th>
+                            <!--<th>Favorite</th>-->
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for file in profile.marks_card_set.all %}
+                            <tr>
+                                <td>{{ file.semester }}</td>
+                                <td>
+                                    <a target="_blank" href="{{ file.marks_card.url }}">
+                                        <button type="button" class="btn btn-success btn-xs">
+                                            <span class="glyphicon glyphicon-file"></span>&nbsp; View
+                                        </button>
+                                    </a>
+                                </td>
+                              
+                                <td>
+                                    <form action="{% url 'hostel:delete_file' profile.id file.id %}" method="post" style="display: inline;">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="file_id" value="{{ file.id }}" />
+                                        <button type="submit" class="btn btn-danger btn-xs">
+                                            <span class="glyphicon glyphicon-remove"></span>&nbsp; Delete
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
