@@ -93,7 +93,6 @@ PyJWT==1.4.2
 pynotify==0.1.1
 pyOpenSSL==17.2.0
 pyparsing==2.2.0
-pypiwin32==220
 pyreadline==2.1
 PySocks==1.6.7
 python-dateutil==2.6.0
