@@ -15,14 +15,14 @@ IMAGE_FILE_TYPES = ['png', 'jpg', 'jpeg']
 class a():
 
     def message(self,number):
-        account_sid = "AC212451a1549921604f20696e75ef11e2"
-        auth_token  = "1e2a798cb6a4db62cbad5bb13cd8994a"
+        account_sid = "__account sid__"
+        auth_token  = "__auth token___"
 
         client = Client(account_sid, auth_token)
 
         message = client.messages.create(
-            to="+919019494616", 
-            from_="+18582643742",
+            to="+number", 
+            from_="+number",
             body="\n number of students coming are: "+number)
         
 
@@ -57,7 +57,7 @@ def create_file(request, profile_id):
     form = MarkscardForm(request.POST or None, request.FILES or None)
     profile = get_object_or_404(Profile, pk=profile_id)
     if form.is_valid():
-        files = profile.marks_card_set.all()                         #albums_songs=files
+        files = profile.marks_card_set.all()                         
         for s in files:
             if s.semester == form.cleaned_data.get("semester"):
                 context = {
@@ -88,11 +88,7 @@ def create_file(request, profile_id):
     return render(request, 'hostel/create_file.html', context)
 
 
-#def delete_album(request, album_id):
- #   album = Album.objects.get(pk=album_id)
-  #  album.delete()
-   # albums = Album.objects.filter(user=request.user)
-    #return render(request, 'music/index.html', {'albums': albums})
+
 
 
 def delete_file(request, profile_id, file_id):
@@ -235,8 +231,7 @@ def vote(request,profile_id):
             "type1":type1
             }
         return render(request,'hostel/vote.html',context)
-  #  b=a()
-   # b.message()
+ 
 def messageinfo(request):
 
     today=datetime.date.today()
@@ -254,22 +249,6 @@ def messageinfo(request):
     b.message(messageinfo)
     return render(request,'hostel/about.html')
 
-    # if(day is not 6):
-
-    #     if(hour==17):
-
-    #         b=a()
-    #         b.message(k)
-    #     if(hour==22):
-    #         b=a()
-    #         b.message(k)
-
-    # if(day is 6):
-
-    #     if(hour==10):
-    #         b=a()
-    #         b.message(k)
-    #     if(hour==22):
-    #         b=a()
-    #         b.message(k)  
+   
+   
 
