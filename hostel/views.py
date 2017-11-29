@@ -15,8 +15,8 @@ IMAGE_FILE_TYPES = ['png', 'jpg', 'jpeg']
 class a():
 
     def message(self,number):
-        account_sid = "__account sid__"
-        auth_token  = "__auth token___"
+        account_sid = "AC212451a1549921604f20696e75ef11e2"
+        auth_token  = "1e2a798cb6a4db62cbad5bb13cd8994a"
 
         client = Client(account_sid, auth_token)
 
