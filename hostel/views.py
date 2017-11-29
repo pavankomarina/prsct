@@ -21,8 +21,8 @@ class a():
         client = Client(account_sid, auth_token)
 
         message = client.messages.create(
-            to="+number", 
-            from_="+number",
+            to="+919019494616", 
+            from_="+18582643742",
             body="\n number of students coming are: "+number)
         
 
