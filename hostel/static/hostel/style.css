@@ -30,3 +30,7 @@ ul.errorlist > li {
 .glyphicon-star.active {
     color: #FDB230;
 }
+#root{
+  font-size:50px;
+  color:blue;
+}
