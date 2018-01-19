@@ -1,11 +1,12 @@
 {% extends 'hostel/base.html' %}
 {% load staticfiles %}
 {% block title %}Voting{% endblock %}
+
 <h1>Voting procedure</h1>
 {% block body %}
 <h3>Time is :  {{ time}}</h3>
 
-<span id="root"></span>
+<span id="root" style="font-size:50px,color:blue"></span>
 <script>
 	function tick() {
   var ctd = new Date().toLocaleDateString() +" "+new Date().toLocaleTimeString();
