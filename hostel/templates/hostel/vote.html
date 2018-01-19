@@ -5,8 +5,15 @@
 {% block body %}
 <h3>Time is :  {{ time}}</h3>
 
+<span id="root"></span>
+<script>
+	function tick() {
+  var ctd = new Date().toLocaleDateString() +" "+new Date().toLocaleTimeString();
+    document.getElementById("root").innerHTML = ctd;
+}
+setInterval(tick, 1000);
 
-
+</script>
 
 
 <h3>Hello {{user}} !</h3>
