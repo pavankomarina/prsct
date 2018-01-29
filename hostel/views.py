@@ -208,9 +208,11 @@ def vote(request,profile_id):
             if(hour>6 & hour<19):
                 date=today
                 type1='Dinner'
-            if(hour>19 & hour<22):
+            elif(hour>19 & hour<22):
                 date=tomorrow
                 type1='Breakfast'
+            else:
+                pass
 
         if(day is 6):
             if(hour>6 & hour<10):
