@@ -34,3 +34,8 @@ ul.errorlist > li {
   font-size:50px;
   color:blue;
 }
+.panel-body {
+    padding: 15px;
+    background-color: cornsilk;
+    margin: 1px;
+}
