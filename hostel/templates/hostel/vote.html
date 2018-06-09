@@ -7,7 +7,132 @@
 <h3>Time is :  {{ time}}</h3>
 
 <span id="root" style="font-size:50px;color:blue"></span>
+
+	<h1>Location</h1>
+
+<div id="startLat"></div>
+<div id="startLon"> </div>
+
+
+<div>
+	<h1>Speed</h1>
+	<p id="speed_in_kph"></p>
+
+</div>
 <script>
+	var timestamp;
+var startLat;
+var startLon;
+var array=[];
+function distance_on_geoid(lat1,lon1,lat2,lon2){
+
+    var lat1 = lat1 * Math.PI / 180.0;
+    var lon1 = lon1 * Math.PI / 180.0;
+
+    var lat2 = lat2 * Math.PI / 180.0;
+    var lon2 = lon2 * Math.PI / 180.0;
+
+   
+    var r = 6378100;
+
+    var rho1 = r * Math.cos(lat1);
+    var z1 = r * Math.sin(lat1);
+    var x1 = rho1 * Math.cos(lon1);
+    var y1 = rho1 * Math.sin(lon1);
+
+    var rho2 = r * Math.cos(lat2);
+    var z2 = r * Math.sin(lat2);
+    var x2 = rho2 * Math.cos(lon2);
+    var y2 = rho2 * Math.sin(lon2);
+    
+   
+    var dot = (x1 * x2 + y1 * y2 + z1 * z2);
+    var cos_theta = dot / (r * r);
+
+    var theta = Math.acos(cos_theta);
+
+   
+    return r * theta; 
+
+}
+function returnSpeed(lat1,lon1,timestamp1,lat2,lon2,timestamp2){
+	console.log(lat1,lon1,lat2,lon2,timestamp1,timestamp2);
+    var dist = distance_on_geoid(lat1,lon1,lat2,lon2);
+    var time_s = (timestamp2 - timestamp1) / 1000.0;
+    var speed_mps = dist / time_s;
+    var speed_kph = (speed_mps * 3600) / 1000;
+
+    return speed_kph
+}
+
+
+function getLocation(){
+	var geoSuccess = function(position) {
+    startPos = position;
+    timestamp=startPos.timestamp;
+    startLat=startPos.coords.latitude;
+    startLon=startPos.coords.longitude;
+
+    array.push(startLat);
+	array.push(startLon);
+	array.push(timestamp);
+    
+    document.getElementById('startLat').innerHTML = startPos.coords.latitude;
+    document.getElementById('startLon').innerHTML = startPos.coords.longitude;
+	//console.log(startLat,startLon,timestamp);
+  };
+  navigator.geolocation.getCurrentPosition(geoSuccess);
+ 	
+ 	 }
+
+
+// window.onload = function() {
+//   var startPos;
+//   var geoSuccess = function(position) {
+//     startPos = position;
+//     document.getElementById('startLat').innerHTML = startPos.coords.latitude;
+//     document.getElementById('startLon').innerHTML = startPos.coords.longitude;
+//   };
+//   navigator.geolocation.getCurrentPosition(geoSuccess);
+// };
+
+
+getLocation();
+//sends location frequently!
+window.setInterval(function(){
+	getLocation();
+	// var lat1=startLat;
+	// var log1=startLon;
+	// var timestamp1=timestamp;
+	// getLocation();
+	// var lat2=startLat;
+	// var log2=startLon;
+	// var timestamp2=timestamp;
+	
+
+	//console.log(lat1,log1,lat2,log2,timestamp1,timestamp2);
+	if(array.length>3){
+	var speed=returnSpeed(array[0],array[1],array[2],array[3],array[4],array[5]);
+	array.shift();
+	array.shift();
+	array.shift();
+	}
+	else{
+		var speed=0;
+	}
+	document.getElementById('speed_in_kph').innerHTML = speed;
+
+}, 500);
+
+//determine whether browser supports location or not!
+
+if (navigator.geolocation) {
+  console.log('Geolocation is supported!');
+}
+else {
+  console.log('Geolocation is not supported for this Browser/OS.');
+}
+
 	function tick() {
   var ctd = new Date().toLocaleDateString() +" "+new Date().toLocaleTimeString();
     document.getElementById("root").innerHTML = ctd;
