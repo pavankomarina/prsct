@@ -6,6 +6,7 @@ A user-login based web application to manage hostel members and to view the mark
 - Notification service to send user information to kitchen staff
 
 #### Techstack
-- Python/Django
+- Python
 - Django
+- Mysql
 - Html, CSS,Javascript
