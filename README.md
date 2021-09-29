@@ -7,4 +7,5 @@ A user-login based web application to manage hostel members and to view the mark
 
 #### Techstack
 - Python/Django
+- Django
 - Html, CSS,Javascript
