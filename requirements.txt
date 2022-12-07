@@ -6,7 +6,7 @@ bleach==2.0.0
 bs4==0.0.1
 cachetools==2.0.0
 celery==4.0.2
-certifi==2017.4.17
+certifi==2022.12.7
 cffi==1.10.0
 chardet==3.0.3
 click==6.7
